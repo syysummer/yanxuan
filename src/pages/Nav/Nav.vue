@@ -1,0 +1,14 @@
+<template>
+    <div>
+     分类导航
+    </div>
+</template>
+
+<script>
+export default {}
+
+</script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+
+</style>
