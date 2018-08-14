@@ -11,7 +11,7 @@
         <input type="text" placeholder="邮箱账号" v-model="mail">
       </div>
       <div class="pwd">
-        <input type="text" placeholder="密码" v-model="pwd">
+        <input type="password" placeholder="密码" v-model="pwd">
       </div>
       <div class="issue">
         <span class="promble">注册账号</span>
