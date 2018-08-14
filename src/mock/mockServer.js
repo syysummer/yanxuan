@@ -8,7 +8,7 @@ import shiwu_data from './shiwu_data.json'
 Mock.mock('/data', {code:0, data: data})
 
 // 返回分类页面的数据
-Mock.mock( '/data_nav', {code: 0, data: data.categoryL1List})
+Mock.mock( '/data_nav', {code: 0, data: data_nav.categoryL1List})
 
 //返回首页轮播图片的数据接口
 Mock.mock('/banner', {code:0, data: home_data.focusList})

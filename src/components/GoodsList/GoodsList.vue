@@ -5,9 +5,9 @@
       <h3 class="title">{{cate.name}}</h3>
     </div>
     <ul class="good_list">
-      <li class="item" v-for="(cateItem, index) in cate.itemList" :key="index">
+      <li class="item" v-for="(cateItem, index) in cate.itemList" v-if="index <= 6" :key="index">
         <div class="hd_wraper">
-            <img :src="cateItem.primaryPicUrl" alt="">
+            <img v-lazy="cateItem.primaryPicUrl" alt="">
             <div class="desc">{{cateItem.simpleDesc}}</div>
         </div>
         <div class="tagWraper">
@@ -19,6 +19,12 @@
            <span>¥{{cateItem.retailPrice}}</span>
          </div>
         </div>
+      </li>
+      <li class="item">
+        <a href="javascript:;" class="hd_wraper">
+          <p class="lastName">更多{{cate.name}}好物</p>
+          <i></i>
+        </a>
       </li>
     </ul>
   </div>
@@ -39,6 +45,7 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
+@import '../../common/stylus/mixins.styl'
 .m-indexFloor
   margin-top 0.2rem
   background-color #fff
@@ -64,6 +71,26 @@
         background-color #f4f4f4
         display flex
         flex-direction column
+        position relative
+        .lastName
+          position absolute
+          color #333
+          top 30%
+          font-size 0.32rem
+          left 25%
+          transform -50%
+        i
+          display block
+          background url(../../common/imgs/gsmove.png)
+          vertical-align middle
+          background-repeat no-repeat
+          background-size 100% 100%
+          width 0.66rem
+          position absolute
+          top 45%
+          left 40%
+          transform -50%
+          height 0.66rem !important
         img
           width 100%
         .desc
@@ -74,7 +101,7 @@
           background-color #F1ECE2
           height 0.69rem
           line-height 0.69rem
-
+          ellipsis()
       .tagWraper
         .status
           z-index 1

@@ -5,12 +5,13 @@ import Detail from '../pages/Detail/Detail' // 实物
 import Nav from '../pages/Nav/Nav' // 分类
 import ShopCart from '../pages/ShopCart/ShopCart' // 购物车
 import Profile from '../pages/Profile/Profile' // 个人
-
+import LoginPhone from '../pages/LoginPhone/LoginPhone'
 import InterPage from '../pages/InterPage/InterPage'
 
 Vue.use(VueRouter)
 
 export default new VueRouter({
+  mode: 'history',
   routes: [
     {
       path: '/home',
@@ -41,10 +42,10 @@ export default new VueRouter({
       }
     },
     {
-      path: '/profile',
+      path: '/profile/:id',
       component: Profile,
       meta: {
-        isFootShow: true
+        isFootShow: false
       }
     },
     {
@@ -56,7 +57,7 @@ export default new VueRouter({
     },
     {
       path: '/',
-      redirect: '/detail',
+      redirect: '/interpage',
     }
   ]
 })

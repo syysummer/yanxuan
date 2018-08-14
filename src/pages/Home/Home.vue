@@ -1,6 +1,6 @@
 <template>
   <div class="homeContainer">
-      <MaskLayer />
+    <MaskLayer/>
     <!--主页头部-->
     <div class="homeHeader">
       <span class="title">网易严选</span>
@@ -11,230 +11,258 @@
     </div>
     <!--顶部导航条部分-->
     <div class="nav_wrap" ref="headerNav">
-    <ul class="menu">
-      <li class="item" @click='control(index)' v-for="(cateItem, index) in cateListData" :key="index">
-        <span :class="{active: currentIndex === index}">{{cateItem.name}}</span>
-      </li>
-    </ul>
+      <ul class="menu">
+        <li class="item" @click='control(index)' v-for="(cateItem, index) in cateListData" :key="index">
+          <span :class="{active: currentIndex === index}">{{cateItem.name}}</span>
+        </li>
+      </ul>
     </div>
-    <div class="content_container" ref="contentContainer">
+
     <!--主要内容区-->
-    <div class="content_wrap">
-    <!--轮播图部分-->
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(focus, index) in focusList" :key="index">
-          <img :src="focus.picUrl" alt="banner">
+    <div class="content_container" ref="contentContainer">
+      <div class="content_wrap">
+        <!--轮播图部分-->
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="(focus, index) in focusList" :key="index">
+              <img v-lazy="focus.picUrl" alt="banner">
+            </div>
+          </div>
+          <!--&lt;!&ndash; Add Pagination &ndash;&gt;-->
+          <div class="swiper-pagination"></div>
         </div>
-      </div>
-      <!--&lt;!&ndash; Add Pagination &ndash;&gt;-->
-      <div class="swiper-pagination"></div>
-    </div>
-
-    <!--轮播图下面部分-->
-    <div class="to_grow">
-      <div class="item" v-for="(item,index) in home.policyDescList" :key="index">
-        <img :src="item.icon">
-        <span>{{item.desc}}</span>
-      </div>
-    </div>
-
-    <!--indexFloor部分-->
-    <div class="m-indexFloor">
-        <div class="hd">
-          <div class="hd-Wrap">
-            <span>品牌制造商直供</span>
-            <i class="iconfont icon-jiantouyou"></i>
+        <!--轮播图下面部分-->
+        <div class="to_grow">
+          <div class="item" v-for="(item,index) in home.policyDescList" :key="index">
+            <img :src="item.icon">
+            <span>{{item.desc}}</span>
           </div>
         </div>
-        <div class="hd-itemWrap">
-          <div class="hd-item">
-            <h4>CK制造商</h4>
-            <div class="title">
-              25元起
-            </div>
-            <span>上新</span>
-          </div>
-          <div class="hd-item">
-            <h4>Nine West制造商</h4>
-            <div class="title">
-              199元起
-            </div>
-            <span>上新</span>
-          </div>
-          <div class="hd-item">
-            <h4>新秀丽制造商</h4>
-            <div class="title">
-              49元起
-            </div>
-            <span>上新</span>
-          </div>
-          <div class="hd-item">
-            <h4>Birkenstock集团制造商</h4>
-            <div class="title">
-              89.9元起
-            </div>
-          </div>
-        </div>
-      </div>
 
-    <!--新品发布部分-->
-    <div class="m-newItems">
-        <header class="newItemsWrap">
-          <span>新品首发</span>
-          <div id="all">查看全部 ></div>
-        </header>
-        <div class="m-goodGrid" ref="newGood">
-          <div class="list">
-            <div class="goodGrid-item" v-for="(item,index) in home.newItemList" :key="index">
-              <div class="wraper">
-                <img :src="item.primaryPicUrl" alt="">
-              </div>
+        <!--indexFloor部分-->
+        <div class="m-indexFloor">
+          <div class="hd">
+            <div class="hd-Wrap">
+              <span>品牌制造商直供</span>
+              <i class="iconfont icon-jiantouyou"></i>
+            </div>
+          </div>
+          <div class="hd-itemWrap">
+            <div class="hd-item">
+              <h4>CK制造商</h4>
               <div class="title">
-                新品
+                25元起
               </div>
-              <div class="name">{{item.name}}</div>
-              <div class="newItemDesc">{{item.simpleDesc}}</div>
-              <div class="price">{{item.retailPrice}}￥</div>
+              <span>上新</span>
             </div>
-          </div>
-        </div>
-    </div>
-
-    <!--人气推荐,好物精选-->
-    <div class="m-indexFloor m-popularItemList">
-        <header class="popularItemWrap">
-          <span>人气推荐,好物精选</span>
-          <div class="all">查看全部 ></div>
-        </header>
-        <div class="m-goodGrid" ref="popular">
-          <div class="list">
-            <div class="goodGrid-item" v-for="(item,index) in home.popularItemList" :key="index">
-              <div class="wraper">
-                <img :src="item.primaryPicUrl" alt="">
-              </div>
+            <div class="hd-item">
+              <h4>Nine West制造商</h4>
               <div class="title">
-                限时购
+                199元起
               </div>
-              <div class="name">{{item.name}}</div>
-              <div class="newItemDesc">{{item.simpleDesc}}</div>
-              <div class="price">{{item.retailPrice}}￥</div>
+              <span>上新</span>
+            </div>
+            <div class="hd-item">
+              <h4>新秀丽制造商</h4>
+              <div class="title">
+                49元起
+              </div>
+              <span>上新</span>
+            </div>
+            <div class="hd-item">
+              <h4>Birkenstock集团制造商</h4>
+              <div class="title">
+                89.9元起
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    <!--倒计时部分  -->
-    <div class="m-indexFlash">
-      <div class="computeTime">
-        <div class="limitShop">严选限时购</div>
-        <div class="timeWatch">
-          <input type="text"  v-model="hour">
-          <div>&nbsp; : &nbsp;</div>
-          <input type="text"  v-model="minute">
-          <div>&nbsp; : &nbsp;</div>
-          <input type="text" v-model="second">
-        </div>
-        <div class="next">下一场14:00开始</div>
-      </div>
-      <div class="pic">
-        <img src="http://yanxuan.nosdn.127.net/dc3ea0bf6df2e75dd9ec7fa8987be25a.png?imageView&quality=85&thumbnail=330x330" alt="">
-        <div class="pic_price">
-          <span>¥300</span>
-          <span>¥399</span>
-        </div>
-      </div>
-     </div>
-
-    <!--福利社-->
-    <div class="welfare">
-      <img src="http://yanxuan.nosdn.127.net/a3ea2d1108c94c7dece05eddf95f6df5.jpg" alt="">
-    </div>
-
-    <!--专题精选-->
-    <div class="m-indexFloor m-indexTopics">
-      <div class="hd">
-        <div class="hd-Wrap">
-          <span>专题精选</span>
-          <i class="iconfont icon-jiantouyou"></i>
-        </div>
-      </div>
-      <div class="m-indexTopics-slide" ref="indexTopics">
-        <div class="indexTopics-wrap">
-          <div class="hd-item" v-for="(item, index) in home.topicList" :key="index">
-            <img :src="item.itemPicUrl" alt="">
-            <div class="detail">
-              <div class="decription">
-                <div class="title">{{item.title}}</div>
-                <div class="subTitle">{{item.subtitle}}</div>
+        <!--新品发布部分-->
+        <div class="m-newItems">
+          <header class="newItemsWrap">
+            <span>新品首发</span>
+            <div id="all">查看全部 ></div>
+          </header>
+          <div class="m-goodGrid" ref="newGood">
+            <div class="list">
+              <div class="goodGrid-item" v-for="(item,index) in home.newItemList" :key="index">
+                <div class="wraper">
+                  <img v-lazy="item.primaryPicUrl" alt="">
+                </div>
+                <div class="title">
+                  新品
+                </div>
+                <div class="name">{{item.name}}</div>
+                <div class="newItemDesc">{{item.simpleDesc}}</div>
+                <div class="price">{{item.retailPrice}}￥</div>
               </div>
-              <div class="price">{{item.priceInfo}}元起</div>
             </div>
           </div>
         </div>
+
+        <!--人气推荐,好物精选-->
+        <div class="m-indexFloor m-popularItemList">
+          <header class="popularItemWrap">
+            <span>人气推荐,好物精选</span>
+            <div class="all">查看全部 ></div>
+          </header>
+          <div class="m-goodGrid" ref="popular">
+            <div class="list">
+              <div class="goodGrid-item" v-for="(item,index) in home.popularItemList" :key="index">
+                <div class="wraper">
+                  <img v-lazy="item.primaryPicUrl" alt="">
+                </div>
+                <div class="title">
+                  限时购
+                </div>
+                <div class="name">{{item.name}}</div>
+                <div class="newItemDesc">{{item.simpleDesc}}</div>
+                <div class="price">{{item.retailPrice}}￥</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--倒计时部分  -->
+        <div class="m-indexFlash">
+          <div class="computeTime">
+            <div class="limitShop">严选限时购</div>
+            <div class="timeWatch">
+              <input type="text" v-model="hour">
+              <div>&nbsp; : &nbsp;</div>
+              <input type="text" v-model="minute">
+              <div>&nbsp; : &nbsp;</div>
+              <input type="text" v-model="second">
+            </div>
+            <div class="next">下一场14:00开始</div>
+          </div>
+          <div class="pic">
+            <img
+              src="http://yanxuan.nosdn.127.net/dc3ea0bf6df2e75dd9ec7fa8987be25a.png?imageView&quality=85&thumbnail=330x330"
+              alt="">
+            <div class="pic_price">
+              <span>¥300</span>
+              <span>¥399</span>
+            </div>
+          </div>
+        </div>
+
+        <!--福利社-->
+        <div class="welfare">
+          <img src="http://yanxuan.nosdn.127.net/a3ea2d1108c94c7dece05eddf95f6df5.jpg" alt="">
+        </div>
+
+        <!--专题精选-->
+        <div class="m-indexFloor m-indexTopics">
+          <div class="hd">
+            <div class="hd-Wrap">
+              <span>专题精选</span>
+              <i class="iconfont icon-jiantouyou"></i>
+            </div>
+          </div>
+          <div class="m-indexTopics-slide" ref="indexTopics">
+            <div class="indexTopics-wrap">
+              <div class="hd-item" v-for="(item, index) in home.topicList" :key="index">
+                <img :src="item.itemPicUrl" alt="">
+                <div class="detail">
+                  <div class="decription">
+                    <div class="title">{{item.title}}</div>
+                    <div class="subTitle">{{item.subtitle}}</div>
+                  </div>
+                  <div class="price">{{item.priceInfo}}元起</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--好物列表-->
+        <GoodsList :cateList='home.cateList'/>
+
+        <!--底部认证部分  -->
+        <div class="copyright">
+          <div class="content">
+            <div class="bd">
+              <a href="javascript:;" class="goApp">下载APP</a>
+              <a href="javascript:;">电脑版</a>
+            </div>
+            <p class="desc">
+              <span>网易公司版权所有 © 1997-2018</span>
+              <br>
+              <span>食品经营许可证：JY13301080111719</span>
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
 
-    <!--好物列表-->
-    <GoodsList :cateList = 'home.cateList'/>
+    <!--回到顶部-->
+    <div class="fixed" @click="toTop"></div>
 
-    </div>
-    </div>
   </div>
 </template>
 
 <script>
-import BScroll from 'better-scroll'
-import Swiper from 'swiper'
-import 'swiper/dist/css/swiper.min.css'
-import MaskLayer from '../../components/MaskLayer/MaskLayer'
-import GoodsList from '../../components/GoodsList/GoodsList'
-import {mapState} from 'vuex'
-export default {
-  data () {
-    return {
-      currentIndex: 0,
-      hour: '',
-      minute: '',
-      second: ''
-    }
-  },
-  computed: {
-    ...mapState(['cateListData', 'focusList', 'home'])
-  },
-  mounted () {
-    this.$store.dispatch('getCateList') // 获取顶部列表数据
-    this.$store.dispatch('getBanner')  // 获取轮播图数据
-    this.$store.dispatch('getHomeData') // 获取主页数据
-    this._countDown ()
-  },
-  components: {
-    MaskLayer,
-    GoodsList
-  },
-  methods: {
-    control(index) {
-      this.currentIndex = index
+  import BScroll from 'better-scroll'
+  import Swiper from 'swiper'
+  import 'swiper/dist/css/swiper.min.css'
+  import MaskLayer from '../../components/MaskLayer/MaskLayer'
+  import GoodsList from '../../components/GoodsList/GoodsList'
+  import {mapState} from 'vuex'
+  export default {
+    data() {
+      return {
+        currentIndex: 0,
+        hour: '',
+        minute: '',
+        second: '',
+        scrollY: 0
+      }
     },
-    _countDown(){
-      let expiration = new Date('2018-8-13 00:00:00')
-      setInterval(()=>{
-        let date = new Date()
-        let time = ( expiration - date ) / 1000
-        let hours = parseInt((time / 3600))
-        let minutes = parseInt((time - (hours * 3600)) / 60)
-        let seconds = parseInt(time - ( hours * 3600 + minutes * 60))
-        hours = hours < 10 ? ('0' + hours) : hours
-        minutes = minutes < 10 ? ('0' + minutes) : minutes
-        seconds = seconds < 10 ? ('0' + seconds) : seconds
-        this.hour = hours
-        this.minute = minutes
-        this.second = seconds
-      },500)
+    computed: {
+      ...mapState(['cateListData', 'focusList', 'home'])
     },
-
-  },
-  watch: {
+    mounted() {
+      this.$store.dispatch('getCateList') // 获取顶部列表数据
+      this.$store.dispatch('getBanner')  // 获取轮播图数据
+      this.$store.dispatch('getHomeData') // 获取主页数据
+      this._countDown()
+    },
+    components: {
+      MaskLayer,
+      GoodsList
+    },
+    methods: {
+      control(index) {
+        this.currentIndex = index
+      },
+      _countDown() {
+        let expiration = Date.now() + 60*60*24*1000
+        setInterval(() => {
+          let date = Date.now()
+          if(date >= expiration) {
+            expiration = date + 60*60*24*1000
+          }
+          let time = (expiration - date) / 1000
+          let hours = parseInt((time / 3600))
+          let minutes = parseInt((time - (hours * 3600)) / 60)
+          let seconds = parseInt(time - (hours * 3600 + minutes * 60))
+          hours = hours < 10 ? ('0' + hours) : hours
+          minutes = minutes < 10 ? ('0' + minutes) : minutes
+          seconds = seconds < 10 ? ('0' + seconds) : seconds
+          this.hour = hours
+          this.minute = minutes
+          this.second = seconds
+        }, 500)
+      },
+      toTop () {
+        // 点击回到顶部时,滚动到顶部
+        this.contentContainer.scrollTo(0, 0, 500)
+      }
+    },
+    watch: {
       cateListData() {
         this.$nextTick(() => { // 获取头部导航的相关内容
           new BScroll(this.$refs.headerNav, {
@@ -256,12 +284,17 @@ export default {
         })
       },
       home() {
-        this.$nextTick(() => { // 获取头部导航的相关内容
-          new BScroll(this.$refs.contentContainer, {
+        this.$nextTick(() => { // 实现整体上下滑动的scroll对象
+          this.contentContainer = new BScroll(this.$refs.contentContainer, {
             click: true
           })
+          //监听内容区的滑动
+          //   this.contentContainer.on('scroll',({x, y}) => {
+          //     this.scrollY = Math.abs(y)
+          //   })
         })
-        // 创建新品去水平滚动
+
+        // 创建新品区水平滚动
         new BScroll(this.$refs.newGood, {
           click: true,
           scrollX: true
@@ -276,10 +309,10 @@ export default {
           click: true,
           scrollX: true
         })
-
       }
     }
   }
+
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
@@ -289,9 +322,9 @@ export default {
     width 100%
     height 100%
     position relative
-    &>.content_container
+    & > .content_container
       margin-top 1.48rem
-      height 11.18rem
+      height 10.8rem
     .homeHeader
       width 100%
       background-color white
@@ -678,7 +711,7 @@ export default {
             width 0.96rem
             height 0.96rem
             border-radius 50%
-            background-color rgba(244,143,24,.95)
+            background-color rgba(244, 143, 24, .95)
             color #fff
             font-size 0.26rem
             text-align center
@@ -716,18 +749,44 @@ export default {
               .title
                 font-size 0.30rem
                 margin 0.06rem 0 0.08rem 0.03rem
-                white-space nowrap
-                overflow hidden
-                text-overflow ellipsis
+                ellipsis()
               .subTitle
                 font-size 0.26rem
-                white-space nowrap
-                overflow hidden
-                text-overflow ellipsis
+                ellipsis()
                 color #666
-
               .price
                 font-size 0.32rem
                 color #b4282d
                 margin-top 0.06rem
+      .copyright
+        border-top 1px solid rgba(0, 0, 0, .15);
+        background-color #414141
+      .content
+        text-align center
+        padding 0.54rem 0.2rem 0.28rem 0.2rem
+        .bd
+          a
+            display inline-block
+            width 1.7rem
+            height 0.6rem
+            border: 1px solid #999;
+            color #ffffff
+            font-size 0.24rem
+            line-height 0.62rem
+            &.goApp
+              margin-right 0.5rem
+      .desc
+        margin-top 0.36rem
+        color #999999
+        line-height 0.32rem
+        span
+          font-size 0.24rem
+    .fixed
+      width 0.8rem
+      height 0.8rem
+      background-image url('../../common/imgs/goTop.png')
+      background-size 0.8rem 0.8rem
+      position fixed
+      bottom 1.2rem
+      right 0.3rem
 </style>

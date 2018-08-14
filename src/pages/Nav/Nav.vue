@@ -1,14 +1,134 @@
 <template>
-    <div>
-     分类导航
-    </div>
+ <div class="navWrap">
+   <!--头部搜索部分-->
+   <div class="navHeader">
+     <div class="search">
+       <span>搜索商品,共11964款好物</span>
+     </div>
+   </div>
+
+   <!--导航内容部分-->
+   <div class="navContent">
+     <div class="navMenu" ref="navMenu">
+        <ul class="menu">
+          <li class="item" :class="{active: currentIndex === index}" @click="currentIndex = index" v-for="(nav, index) in navData" :key="index">
+            {{nav.name}}
+          </li>
+        </ul>
+     </div>
+     <div class="navList">
+        <NavList :category = 'navData[currentIndex]'/>
+     </div>
+   </div>
+
+ </div>
 </template>
 
 <script>
-export default {}
+import BScroll from 'better-scroll'
+import NavList from '../../components/NavList/NavList'
+import {mapState} from 'vuex'
+export default {
+  data () {
+    return {
+      currentIndex: 0
+    }
+  },
+  components: {
+    NavList
+  },
+  computed: {
+    ...mapState(['navData'])
+  },
+  mounted () {
+    this.$store.dispatch('getNavData')
+  },
+  watch: {
+    navData () {
+      this.$nextTick(() => { // 创建导航条菜单的scroll对象
+        new BScroll(this.$refs.navMenu, {
+          click: true,
+          bounce: {
+            top: false,
+            bottom: false,
+            left: false,
+            right: false
+          }
+        })
+      })
+    }
+  }
+}
 
 </script>
 
-<style lang="stylus" rel="stylesheet/stylus">
+<style lang="stylus" rel="stylesheet/stylus" scoped>
+.navWrap
+  height 100%
+  width 100%
+  overflow hidden
+  .navHeader
+    height 0.88rem
+    width 100%
+    position fixed
+    top 0
+    left 0
+    background-color #fff
+    z-index 10
+    .search
+      width 6.9rem
+      height 0.56rem
+      position absolute
+      background-color #eee
+      left 0
+      top 0
+      right 0
+      bottom 0
+      margin auto
+      span
+        box-sizing border-box
+        display inline-block
+        width 4.5rem
+        height 0.56rem
+        position absolute
+        left 50%
+        transform translateX(-50%)
+        line-height 0.56rem
+        padding-left 0.6rem
+        background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/search2-2fb94833aa.png);
+        background-repeat no-repeat;
+        background-size 0.32rem 0.32rem
+        background-position 0.12rem 0.12rem
+        color #333
+  .navContent
+    width 100%
+    padding-top 0.9rem
+    height 100%
+    background-color #eee
+    display flex
+    .navMenu
+      height 11.5rem
+      width 1.62rem
+      padding-right 0.02rem
+      .menu
+        width 100%
+        background-color #fff
+        padding-top 0.2rem
+        .item
+          width 100%
+          height 0.5rem
+          text-align center
+          margin-bottom 0.55rem
+          font-size 0.28rem
+          line-height 0.5rem
+          &.active
+            border-left 0.05rem solid #b4282d
+            color #b4282d
+            font-size 0.34rem
+            font-weight bold
 
+    .navList
+      width 5.28rem
+      padding 0.3rem
+      background-color #fff
 </style>

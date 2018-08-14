@@ -30,7 +30,7 @@
 </template>
 
 <script>
-// import MtButton from "mint-ui/packages/button/src/button";
+
 export default {
   data () {
     return {

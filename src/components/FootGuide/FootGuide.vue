@@ -24,7 +24,7 @@
     </span>
       <span>购物车</span>
     </a>
-    <a href="javascript:;" class="guide_item" @click="goTo('/profile')" :class="{on: $route.path === '/profile'}">
+    <a href="javascript:;" class="guide_item" @click="goTo(loginPath)" :class="{on: $route.path === '/profile'}">
     <span class="item_icon">
       <i class="iconfont icon-icon-"></i>
     </span>
@@ -33,12 +33,17 @@
   </footer>
 </template>
 <script>
+import {mapState} from 'vuex'
 export default {
   methods: {
     goTo (path) {
       this.$router.replace(path)
     }
+  },
+  computed: {
+    ...mapState(['loginPath'])
   }
+
 }
 </script>
 
